@@ -1,0 +1,63 @@
+ 
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart - Trend Cart BD</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    @font-face {
+      font-family: 'Chunk';
+      src: url('fonts/Chunk.ttf') format('truetype');
+      font-weight: bold;
+    }
+    @font-face {
+      font-family: 'Alinur';
+      src: url('fonts/Li Alinur Sangbadpatra2 Unicode.ttf') format('truetype');
+    }
+    body { font-family: 'Alinur', sans-serif; }
+    h1 { font-family: 'Chunk', sans-serif; }
+  </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-950 min-h-screen">
+
+  <nav class="bg-white dark:bg-gray-900 border-b sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3">
+        <span class="text-3xl font-bold text-blue-700">TREND CART BD</span>
+      </a>
+      <a href="shop.html" class="text-blue-600 font-medium">Shop</a>
+    </div>
+  </nav>
+
+  <div class="max-w-6xl mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold mb-8">Your Cart</h1>
+    
+    <div id="cart-items" class="space-y-6">
+      <!-- Cart items will appear here -->
+    </div>
+
+    <div class="mt-12 bg-white dark:bg-gray-800 p-8 rounded-3xl">
+      <div class="flex justify-between text-2xl font-bold mb-6">
+        <span>Total</span>
+        <span id="total-price">৳ 0</span>
+      </div>
+      <button onclick="checkout()" 
+              class="w-full bg-gradient-to-r from-blue-600 to-orange-500 text-white py-6 rounded-3xl text-xl font-bold">
+        Proceed to Checkout → WhatsApp Order
+      </button>
+    </div>
+  </div>
+
+  <script>
+    function checkout() {
+      const phone = "8801315121561";
+      const message = "Hello Trend Cart BD, I want to place an order from my cart.";
+      window.location.href = `https://wa.me/\( {phone}?text= \){encodeURIComponent(message)}`;
+    }
+  </script>
+
+</body>
+</html>

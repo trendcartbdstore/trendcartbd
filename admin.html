@@ -1,0 +1,112 @@
+ 
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - Trend Cart BD</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    @font-face { font-family: 'Chunk'; src: url('fonts/Chunk.ttf') format('truetype'); font-weight: bold; }
+    @font-face { font-family: 'Alinur'; src: url('fonts/Li Alinur Sangbadpatra2 Unicode.ttf') format('truetype'); }
+    body { font-family: 'Alinur', sans-serif; }
+    h1, h2 { font-family: 'Chunk', sans-serif; }
+  </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-950">
+
+  <div class="max-w-6xl mx-auto p-6">
+    <h1 class="text-4xl font-bold text-center mb-4">👑 Trend Cart BD Admin</h1>
+<p class="text-center text-2xl font-bold text-orange-600 mb-10">মিস্কিনদের বাদশাহ বন্দে আলী মিয়া</p>
+
+    <!-- Role Selector -->
+    <div class="flex justify-center gap-4 mb-10">
+      <button onclick="switchRole(0)" class="role-btn px-6 py-3 rounded-2xl bg-blue-600 text-white">মিস্কিনদের বাদশাহ বন্দে আলী মিয়া(Full Control)</button>
+      <button onclick="switchRole(1)" class="role-btn px-6 py-3 rounded-2xl bg-emerald-600 text-white">রাজা ফকির লাল বাহাদুর (Moderator)</button>
+    </div>
+
+    <!-- Full Admin Section -->
+    <div id="full-admin" class="space-y-8">
+      <div class="bg-white dark:bg-gray-800 rounded-3xl p-8">
+        <h2 class="text-2xl font-bold mb-6">নতুন প্রোডাক্ট যোগ করুন</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <input id="p-name" placeholder="প্রোডাক্ট নাম" class="p-4 border rounded-2xl">
+          <input id="p-price" type="number" placeholder="দাম" class="p-4 border rounded-2xl">
+          <input id="p-image" placeholder="ছবির লিংক" class="p-4 border rounded-2xl">
+        </div>
+        <button onclick="addProduct()" class="mt-6 bg-green-600 text-white px-10 py-4 rounded-2xl w-full">প্রোডাক্ট যোগ করুন</button>
+      </div>
+    </div>
+
+    <!-- Moderator Section -->
+    <div id="moderator" class="hidden space-y-8">
+      <div class="bg-white dark:bg-gray-800 rounded-3xl p-8">
+        <h2 class="text-2xl font-bold mb-6">প্রোডাক্ট ম্যানেজমেন্ট (Moderator)</h2>
+        <div id="mod-product-list" class="space-y-4"></div>
+      </div>
+      
+      <div class="bg-white dark:bg-gray-800 rounded-3xl p-8">
+        <h2 class="text-2xl font-bold mb-6">Flash Sale সেট করুন</h2>
+        <input id="flash-name" placeholder="Flash Sale প্রোডাক্ট" class="p-4 border rounded-2xl w-full mb-4">
+        <button onclick="setFlashSale()" class="bg-orange-500 text-white px-8 py-4 rounded-2xl">Flash Sale চালু করুন</button>
+      </div>
+    </div>
+
+    <div class="text-center mt-12 text-sm text-gray-500">
+      লগইন সিস্টেম পরে যোগ করা হবে। এখন শুধু ডেমো।
+    </div>
+  </div>
+
+  <script>
+    let products = JSON.parse(localStorage.getItem('products')) || [];
+
+    function switchRole(role) {
+      document.getElementById('full-admin').classList.toggle('hidden', role !== 0);
+      document.getElementById('moderator').classList.toggle('hidden', role !== 1);
+    }
+
+    function addProduct() {
+      const name = document.getElementById('p-name').value;
+      const price = document.getElementById('p-price').value;
+      const image = document.getElementById('p-image').value || 'https://picsum.photos/id/20/300/300';
+
+      if (name && price) {
+        products.push({ name, price: Number(price), image });
+        localStorage.setItem('products', JSON.stringify(products));
+        alert("✅ প্রোডাক্ট যোগ হয়েছে!");
+        renderModeratorProducts();
+      }
+    }
+
+    function renderModeratorProducts() {
+      const container = document.getElementById('mod-product-list');
+      container.innerHTML = products.map((p, i) => `
+        <div class="flex justify-between items-center bg-gray-50 p-4 rounded-2xl">
+          <div>
+            <p class="font-medium">${p.name}</p>
+            <p class="text-orange-500">৳ ${p.price}</p>
+          </div>
+          <button onclick="deleteProduct(${i})" class="text-red-500">মুছুন</button>
+        </div>
+      `).join('');
+    }
+
+    function deleteProduct(i) {
+      if (confirm("মুছবেন?")) {
+        products.splice(i, 1);
+        localStorage.setItem('products', JSON.stringify(products));
+        renderModeratorProducts();
+      }
+    }
+
+    function setFlashSale() {
+      const name = document.getElementById('flash-name').value;
+      if (name) alert(`🔥 Flash Sale চালু হয়েছে: ${name}`);
+    }
+
+    // Initial load
+    renderModeratorProducts();
+  </script>
+</body>
+</html>

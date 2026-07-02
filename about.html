@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - Trend Cart BD</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    @font-face {
+      font-family: 'Chunk';
+      src: url('fonts/Chunk.ttf') format('truetype');
+      font-weight: bold;
+    }
+    @font-face {
+      font-family: 'Alinur';
+      src: url('fonts/Li Alinur Sangbadpatra2 Unicode.ttf') format('truetype');
+    }
+    body { font-family: 'Alinur', sans-serif; }
+    h1, h2 { font-family: 'Chunk', sans-serif; }
+  </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-950">
+
+  <nav class="bg-white dark:bg-gray-900 border-b sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3">
+        <span class="text-3xl font-bold text-blue-700">TREND CART BD</span>
+      </a>
+    </div>
+  </nav>
+
+  <div class="max-w-4xl mx-auto px-4 py-12">
+    <h1 class="text-5xl font-bold text-center mb-12">About Trend Cart BD</h1>
+
+    <!-- Editable Profile Section -->
+    <div class="bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-xl">
+      <div class="flex flex-col md:flex-row gap-10 items-center">
+        <!-- Photo -->
+        <div class="w-48 h-48 bg-gray-200 dark:bg-gray-700 rounded-3xl flex-shrink-0 overflow-hidden">
+          <img id="profile-photo" src="https://picsum.photos/id/64/300/300" class="w-full h-full object-cover">
+        </div>
+        
+        <!-- Bio -->
+        <div class="flex-1">
+          <h2 id="owner-name" class="text-3xl font-bold mb-2">আপনার নাম</h2>
+          <p id="owner-title" class="text-orange-500 font-medium">Founder & CEO, Trend Cart BD</p>
+          
+          <div class="mt-8 prose dark:prose-invert">
+            <p id="bio-text">
+              আমি Trend Cart BD এর প্রতিষ্ঠাতা। আমার লক্ষ্য হলো বাংলাদেশের মানুষকে প্রিমিয়াম কোয়ালিটির পণ্য সাশ্রয়ী মূল্যে পৌঁছে দেওয়া। 
+              আমি বিশ্বাস করি স্মার্ট প্রোডাক্ট স্মার্ট লিভিং নিয়ে আসে।
+            </p>
+          </div>
+          
+          <!-- Edit Button -->
+          <button onclick="editProfile()" 
+                  class="mt-8 bg-blue-600 text-white px-8 py-4 rounded-2xl flex items-center gap-3 hover:bg-blue-700">
+            <i class="fa-solid fa-pen"></i>
+            Edit Profile (আমার তথ্য পরিবর্তন করুন)
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-12 text-center text-sm text-gray-500">
+      আপনি চাইলে এখানে আরও ছবি, অভিজ্ঞতা, ভিশন ইত্যাদি যোগ করতে পারবেন।
+    </div>
+  </div>
+
+  <script>
+    function editProfile() {
+      const name = prompt("আপনার নাম লিখুন:", document.getElementById('owner-name').textContent);
+      if (name) document.getElementById('owner-name').textContent = name;
+
+      const title = prompt("আপনার পদবি/টাইটেল:", document.getElementById('owner-title').textContent);
+      if (title) document.getElementById('owner-title').textContent = title;
+
+      const bio = prompt("আপনার বায়ো/জীবনবৃত্তান্ত লিখুন:", document.getElementById('bio-text').textContent);
+      if (bio) document.getElementById('bio-text').textContent = bio;
+
+      alert("✅ তথ্য আপডেট হয়েছে! (ব্রাউজার রিফ্রেশ করলে আবার আগের মতো হয়ে যাবে। ভবিষ্যতে Admin Panel এ স্থায়ীভাবে সেভ করা যাবে।)");
+    }
+  </script>
+
+</body>
+</html>
